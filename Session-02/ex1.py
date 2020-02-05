@@ -1,10 +1,12 @@
-for i in range(12):
-    if i == 0:
-        print(0)
-    elif i > 0:
-        n1 = i -1
-        n2 = i
-        n3 = n1 + n2
-        print(n3)
-        n1 = n2
-        n2 = n3
+a= 12
+f = 0                                         #first element of series
+s = 1                                         #second element of series
+if a <= 0:
+    print("The requested series is",f)
+else:
+    print(f, s, end=" ")
+    for x in range(2,a):
+        next = f+s
+        print(next, end=" ")
+        f = s
+        s = next
