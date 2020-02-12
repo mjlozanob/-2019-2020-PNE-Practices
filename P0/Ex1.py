@@ -1,5 +1,4 @@
 from Seq0 import *
-from pathlib import Path
 
 genes = ["FRAT1.txt", "U5.txt"]
 

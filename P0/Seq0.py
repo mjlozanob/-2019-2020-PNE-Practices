@@ -1,6 +1,12 @@
+from pathlib import Path
+
 def seq_ping():
     print("ok")
 
+def seq_read_fasta(filename) :
+    file_contents = Path(filename).read_text()
+
+    # return seq
 
 def seq_complement(seq):
     for i in seq:
@@ -13,8 +19,9 @@ def seq_complement(seq):
         elif i == "C":
             print("G", end="")
 
+
 def seq_len(seq):
-    print(len(seq))
+    return len(seq)
 
 def seq_count_base (seq, base):
     count = 0
