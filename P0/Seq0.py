@@ -1,8 +1,8 @@
-def seq_ping(): #done
+def seq_ping():
     print("ok")
 
 
-def seq_complement(seq): #done
+def seq_complement(seq):
     for i in seq:
         if i == "A":
             print("T", end="")
@@ -13,10 +13,10 @@ def seq_complement(seq): #done
         elif i == "C":
             print("G", end="")
 
-def seq_len(seq): #done
+def seq_len(seq):
     print(len(seq))
 
-def seq_count_base (seq, base): #done
+def seq_count_base (seq, base):
     count = 0
     for i in seq:
         if base == i:
