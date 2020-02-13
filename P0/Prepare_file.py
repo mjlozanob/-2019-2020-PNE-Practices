@@ -4,7 +4,7 @@ from pathlib import Path
 FOLDER = "../Session-04/"
 FILENAME = "U5.txt"
 def seq_read_fasta(filename) :
-    file_contents = Path(filename).read_text().splitlines(True)
-    print(file_contents)
+    file_contents = Path(filename).read_text().splitlines()
+    print(file_contents[1:])
 
-seq_read_fasta((FOLDER + FILENAME)
+seq_read_fasta(FOLDER + FILENAME)
