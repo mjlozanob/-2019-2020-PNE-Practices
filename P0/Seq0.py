@@ -3,10 +3,9 @@ from pathlib import Path
 def seq_ping():
     print("ok")
 
-def seq_read_fasta(filename) :
-    file_contents = Path(filename).read_text()
 
-    # return seq
+
+
 
 def seq_complement(seq):
     for i in seq:
@@ -48,4 +47,3 @@ def seq_count(seq): #done
     print(data)
 
 
-seq_count("ATGGGGAGCCCACAATAAAGAAGGGCTGA")
