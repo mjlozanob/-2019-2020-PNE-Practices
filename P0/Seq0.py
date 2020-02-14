@@ -1,11 +1,21 @@
-from pathlib import Path
-
 def seq_ping():
     print("ok")
 
+from pathlib import Path
+FOLDER = "../Session-04/"
+FILENAME = "U5.txt"
+def seq_read_fasta(filename):
+    # PRINTS THE FIRST 20 BASES OF THE FILE
+    string = ''
+    file = Path(filename).read_text().splitlines()
+    file = file[1:]
+    for element in file:
+        string = string + element
 
+    return string[:20]
 
-
+def seq_len(seq):
+    return len(seq)
 
 def seq_complement(seq):
     for i in seq:
@@ -19,15 +29,12 @@ def seq_complement(seq):
             print("G", end="")
 
 
-def seq_len(seq):
-    return len(seq)
+
 
 def seq_count_base (seq, base):
-    count = 0
-    for i in seq:
-        if base == i:
-            count += 1
-    print(count)
+    bases = ["A", "T", "G", "C"]
+    for element in bases:
+
 
 def seq_count(seq): #done
     count_a = 0
