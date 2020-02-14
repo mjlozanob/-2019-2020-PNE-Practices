@@ -9,6 +9,7 @@ def seq_read_fasta(filename) :
     file = file[1:]
     for element in file:
         string = string + element
-    print(string)
+
+    print(string[:20])
 
 seq_read_fasta(FOLDER + FILENAME)
