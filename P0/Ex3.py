@@ -1,4 +1,4 @@
-from Seq0_def import *
+from Seq0 import *
 
 Genes = ["ADA", "FRAT1", "FXN", "U5", "RNU6_269P"]
 Folder = "../Session-04/"

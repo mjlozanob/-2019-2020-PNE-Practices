@@ -1,42 +1,31 @@
+from pathlib import Path
+FOLDER = "../Session-04/"
+FILENAME = "ADA.txt"
+
 def seq_ping():
     print("ok")
 
-from pathlib import Path
-FOLDER = "../Session-04/"
-FILENAME = "U5.txt"
 def seq_read_fasta(filename):
-    # PRINTS THE FIRST 20 BASES OF THE FILE
     string = ''
     file = Path(filename).read_text().splitlines()
     file = file[1:]
     for element in file:
         string = string + element
 
-    return string[:20]
+    return string
 
 def seq_len(seq):
     return len(seq)
 
-def seq_complement(seq):
-    for i in seq:
-        if i == "A":
-            print("T", end="")
-        elif i == "T":
-            print("A", end="")
-        elif i == "G":
-            print("C", end="")
-        elif i == "C":
-            print("G", end="")
+def seq_count_base(seq, base):
+    count = 0
+    for element in seq:
+        if element == base:
+            count += 1
 
+    return count
 
-
-
-def seq_count_base (seq, base):
-    bases = ["A", "T", "G", "C"]
-    for element in bases:
-
-
-def seq_count(seq): #done
+def seq_count(seq):
     count_a = 0
     count_t = 0
     count_g = 0
@@ -51,6 +40,32 @@ def seq_count(seq): #done
         elif i == "C":
             count_c += 1
     data = {'A': count_a, 'T': count_t, 'C': count_c, 'G': count_g}
-    print(data)
+    return data
+
+def seq_reverse(seq):
+    reverse_seq = []
+    index = len(seq)
+    while index > 0:
+        reverse_seq += seq[index - 1]
+        index = index - 1
+    print(reverse_seq)
+
+def seq_complement(seq):
+    complement = ""
+    for i in seq:
+        if i == "A":
+            complement = complement + "T"
+        elif i == "T":
+            complement = complement + "A"
+        elif i == "G":
+            complement = complement + "C"
+        elif i == "C":
+            complement = complement + "G"
+
+    return complement
+
+
+
+
 
 
