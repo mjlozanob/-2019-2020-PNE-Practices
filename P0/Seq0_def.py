@@ -1,8 +1,4 @@
-#DELETE THE FOLLOWING THREE LINES WHEN DONE
 from pathlib import Path
-FOLDER = "../Session-04/"
-FILENAME = "U5.txt"
-
 
 def seq_read_fasta(filename):
     string = ''
