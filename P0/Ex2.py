@@ -1,10 +1,5 @@
-from Seq0 import *
 
+from pathlib import Path
 FOLDER = "../Session-04/"
 FILENAME = "U5.txt"
 
-seq = seq_read_fasta(FOLDER + FILENAME)
-
-lseq = seq_len(seq[:20])
-
-print(lseq)
