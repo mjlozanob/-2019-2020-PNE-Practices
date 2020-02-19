@@ -19,6 +19,7 @@ def seq_read_fasta(filename):
 def seq_len(seq):
     print(len(seq))
 
+
 """for element in FILENAME:
     seq = seq_read_fasta(FOLDER + element)
     seq_len(seq)"""
