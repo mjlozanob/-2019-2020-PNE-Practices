@@ -7,5 +7,5 @@ end = ".txt"
 for element in Genes:
     filename = Folder + element + end
     sequence = seq_read_fasta(filename)
-    data = seq_count(filename)
+    data = seq_count(sequence)
     print(data)

@@ -10,4 +10,4 @@ for gene in Genes:
         filename = Folder + element + end
         sequence = seq_read_fasta(filename)
         data = seq_count_base(sequence, element)
-    print(data)
+print(data)
