@@ -6,5 +6,6 @@ end = ".txt"
 
 for element in Genes:
     filename = Folder + element + end
-    length = seq_len(filename)
+    sequence = seq_read_fasta(filename)
+    length = seq_len(sequence)
     print("Gene ", element, "---> Length: ", length)
