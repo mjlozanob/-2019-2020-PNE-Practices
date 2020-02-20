@@ -7,7 +7,8 @@ Bases = ["A", "C", "G", "T"]
 
 for gene in Genes:
     for element in Bases:
-        filename = Folder + element + end
+        filename = Folder + gene + end
         sequence = seq_read_fasta(filename)
         data = seq_count_base(sequence, element)
-print(data)
+        print(gene)
+        print(element, ":", data)

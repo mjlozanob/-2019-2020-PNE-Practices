@@ -52,12 +52,12 @@ def seq_count(seq):
 def seq_reverse(seq):
     # Returns the reversed sequence
 
-    reverse_seq = []
+    reverse_seq = ""
     index = len(seq)
     while index > 0:
         reverse_seq += seq[index - 1]
         index = index - 1
-    print(reverse_seq)
+    return reverse_seq
 
 def seq_complement(seq):
     # Returns the complementary sequence
@@ -74,6 +74,7 @@ def seq_complement(seq):
             complement = complement + "G"
 
     return complement
+
 
 
 
