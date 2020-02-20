@@ -1,11 +1,12 @@
 from Seq0 import *
 
-Genes = ["ADA", "FRAT1", "FXN", "U5", "RNU6_269P"]
-Folder = "../Session-04/"
-end = ".txt"
+FOLDER = "../Session-04/"
+FILENAME = "../Session-04/U5.txt"
 
-for gene in Genes:
-    filename = gene + Folder + end
-    sequence = seq_read_fasta(filename)
-    frag = sequence[:20]
-    rev_seq = seq_reverse(frag)
+sequence = seq_read_fasta(FOLDER + FILENAME)
+frag = sequence[:20]
+rev_frag = seq_reverse(frag)
+
+print("Gene U5: ")
+print("Frag: ", frag)
+print("Rev: ", rev_frag)

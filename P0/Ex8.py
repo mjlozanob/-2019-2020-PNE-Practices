@@ -11,4 +11,4 @@ for gene in Genes:
         filename = Folder + gene + end
         sequence = seq_read_fasta(filename)
         data = seq_count(sequence)
-    print("Gene", gene, ": Most frequent Base: ",max(data, key=data.get))
+    print("Gene", gene, ": Most frequent Base: ", max(data, key=data.get))
