@@ -1,12 +1,15 @@
 class Seq:
     """A class for representing sequences"""
     def __init__(self, strbases):
+        base = ["A", 'C', 'G', 'T']
+        for i in strbases:
+            if i not in base:
+                self.strbases = "ERROR"
+                print("ERROR!")
 
-        # Initialize the sequence with the value
-        # passed as argument when creating the object
+                return
         self.strbases = strbases
-
-        print("New sequence created!")
+        print("New sequence created.")
 
     def __str__(self):
         """Method called when the object is being printed"""
@@ -36,11 +39,9 @@ class Gene(Seq):
         """Print the Gene name along with the sequence"""
         return self.name + "-" + self.strbases
 
+# Main program
 
-# --- Main program
-s1 = Seq("AGTACACTGGT")
-g = Gene("CGTAAC", "FRAT1")
-
-# -- Printing the objects
+s1 = Seq("ACCTGC")
+s2 = Seq("Hello? Am I a valid sequence?")
 print(f"Sequence 1: {s1}")
-print(f"Gene: {g}")
+print(f"Sequence 2: {s2}")
