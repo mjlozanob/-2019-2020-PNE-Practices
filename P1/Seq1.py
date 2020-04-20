@@ -5,15 +5,17 @@ class Seq:
             self.strbases = strbases
             print("Null sequence created")
             return
-        base = ["A", 'C', 'G', 'T']
+        bases = ["A", 'C', 'G', 'T']
         for i in strbases:
-            if i not in base:
+            if i not in bases:
                 self.strbases = "ERROR"
                 print("INVALID Seq!")
+                self.length = 0
 
                 return
         self.strbases = strbases
         print("New sequence created.")
+        self.length = strbases
 
     def __str__(self):
         """Method called when the object is being printed"""
@@ -22,6 +24,10 @@ class Seq:
 
     def len(self):
         """Calculate the length of the sequence"""
+        bases = ["A", 'C', 'G', 'T']
+        for e in self.strbases:
+            if e not in bases:
+                return 0
         return len(self.strbases)
 
 def print_seqs(seqs_list):
