@@ -1,4 +1,4 @@
-from Seq1 import *
+from Seq1 import Seq
 
-seq_list = [Seq("ACGTA")]
+seq_list = ["ACGTA"]
 print_seqs(seq_list)

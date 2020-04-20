@@ -1,11 +1,6 @@
 class Seq:
     """A class for representing sequences"""
-    def __init__(self, strbases="NULL"):
-        if len(strbases) == 0:
-            self.strbases = "NULL"
-            print("NULL Seq created")
-
-            return
+    def __init__(self, strbases):
         base = ["A", 'C', 'G', 'T']
         for i in strbases:
             if i not in base:
