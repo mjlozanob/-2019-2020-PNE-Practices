@@ -39,3 +39,6 @@ def generate_seqs(pattern, number):
     for element in range(1, number+1):
         sequence.append(Seq(pattern * element))
     return sequence
+
+def count_base(base, self):
+    return self.strbases.count(base)
