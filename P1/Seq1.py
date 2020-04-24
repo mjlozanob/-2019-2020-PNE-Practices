@@ -33,12 +33,18 @@ class Seq:
     def count_base(self, base):
         return self.strbases.count(base)
 
+    def count(self):
+        result = {"A": self.count_base("A"), "C": self.count_base("C"), "G": self.count_base("G"),
+                  "T": self.count_base("T")}
+        return result
+
 def print_seqs(seqs_list):
         bases = ["A", "C", "G", "T"]
         for element in seqs_list:
             print("Sequence ", seqs_list.index(element), ":", "Length: ", element.len(), element)
             for base in bases:
                 print(base, ":", element.count_base(base))
+
 def generate_seqs(pattern, number):
     sequence = []
     for element in range(1, number+1):
