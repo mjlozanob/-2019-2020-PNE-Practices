@@ -1,8 +1,8 @@
 from Seq1 import*
 
-FOLDER = "../Session 4./"
+FOLDER = "../Session-04./"
 gene = 'U5.txt'
-print("----Exercise 9----")
+
 
 s1 = Seq("")
 s1.read_fasta(FOLDER + gene)
