@@ -11,13 +11,5 @@ s3 = Seq("Invalid sequence")
 
 seq_list = [s1, s2, s3]
 
-base = ["A", "C", "T", "G"]
-
-for element in seq_list:
-    for item in base:
-        result = []
-        count = count_base(item, element)
-        r2= result.append(base).append(":").append(count)
-    print(r2)
-
+print_seqs(seq_list)
 

@@ -1,8 +1,8 @@
 class Seq:
     """A class for representing sequences"""
     def __init__(self, strbases="NULL"):
-        if strbases == "NULL":
-            self.strbases = strbases
+        if strbases == "":
+            self.strbases = "NULL"
             print("Null sequence created")
             return
         bases = ["A", 'C', 'G', 'T']
@@ -30,15 +30,18 @@ class Seq:
                 return 0
         return len(self.strbases)
 
+    def count_base(self, base):
+        return self.strbases.count(base)
+
 def print_seqs(seqs_list):
+        bases = ["A", "C", "G", "T"]
         for element in seqs_list:
             print("Sequence ", seqs_list.index(element), ":", "Length: ", element.len(), element)
-
+            for base in bases:
+                print(base, ":", element.count_base(base))
 def generate_seqs(pattern, number):
     sequence = []
     for element in range(1, number+1):
         sequence.append(Seq(pattern * element))
     return sequence
 
-def count_base(base, self):
-    return self.strbases.count(base)
