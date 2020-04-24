@@ -38,6 +38,14 @@ class Seq:
                   "T": self.count_base("T")}
         return result
 
+    def reverse(self):
+        base = ["A", 'C', 'G', 'T']
+        for element in self.strbases:
+            if element not in base:
+                return self.strbases
+        else:
+            return self.strbases[::-1]
+
 def print_seqs(seqs_list):
         bases = ["A", "C", "G", "T"]
         for element in seqs_list:
