@@ -58,6 +58,12 @@ class Seq:
                     result = result + comp[c]
                 return result
 
+    def read_fasta(self, filename):
+        lines = Path(filename).read_text()
+        body = lines.split("\n")[1:]
+        self.strbases = "".join(body)
+        return self
+
 def print_seqs(seqs_list):
         bases = ["A", "C", "G", "T"]
         for element in seqs_list:
