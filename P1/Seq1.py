@@ -46,6 +46,18 @@ class Seq:
         else:
             return self.strbases[::-1]
 
+    def complement(self):
+        comp = {"A": 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+        result = ''
+        base = ["A", 'C', 'G', 'T']
+        for element in self.strbases:
+            if element not in base:
+                return self.strbases
+            else:
+                for c in self.strbases:
+                    result = result + comp[c]
+                return result
+
 def print_seqs(seqs_list):
         bases = ["A", "C", "G", "T"]
         for element in seqs_list:
