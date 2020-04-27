@@ -11,8 +11,8 @@ PORT = 8080
 
 # -- Create a client object
 c = Client(IP, PORT)
+print(c)
 
-# -- Send a message to the server
 print("Sending a message to the server...")
-response = c.talk("Testing!!!")
+response = c.talk("RAYMOND")
 print(f"Response: {response}")

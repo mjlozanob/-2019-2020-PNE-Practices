@@ -1,4 +1,6 @@
-#import socket
+import socket
+import termcolor
+
 class Client:
     def __init__(self, ip, port):
         self.ip = ip
@@ -29,10 +31,9 @@ class Client:
         # Return the response
         return response
 
-    def debug_talk(self):
-
-        a = self.talk(msg)
-        print("To server: ", end="")
-        termcolor.cprint(msg, "blue")
-        print("From Server: \n")
-        return termcolor.cprint(a, "green")
+    def debug_talk(self, message):
+        msg = self.talk(message)
+        print("To server: ")
+        termcolor.cprint(message, 'red')
+        print("From server: ")
+        termcolor.cprint(msg, 'green')
