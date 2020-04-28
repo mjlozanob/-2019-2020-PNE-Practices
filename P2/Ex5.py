@@ -6,7 +6,7 @@ FILENAME = "../Session-04/U5.txt"
 string = seq_read_fasta(FOLDER + FILENAME)
 
 PRACTICE = 2
-EXERCISE = 4
+EXERCISE = 5
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
