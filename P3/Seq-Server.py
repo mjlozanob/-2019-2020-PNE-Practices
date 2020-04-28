@@ -100,6 +100,10 @@ while True:
             reverse = seq.reverse()
             print(reverse)
 
+        # -- Implement GENE command
+        elif "GENE" in msg:
+
+
         # -- Print the received message
 
             #print(f"Message received: {msg}")
