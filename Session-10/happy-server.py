@@ -2,7 +2,7 @@ import socket
 
 # Configure the Server's IP and PORT
 PORT = 8080
-IP = "192.168.1.40"
+IP = "127.0.0.1"
 
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -52,7 +52,7 @@ while True:
         print(f"Message received: {msg}")
 
         # -- Send a response message to the client
-        response = "HELLO. I am the Happy Server :-)\n"
+        response = "ECHO: "+ msg
 
         # -- The message has to be encoded into bytes
         cs.send(response.encode())
