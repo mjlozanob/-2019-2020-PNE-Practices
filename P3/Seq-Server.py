@@ -92,6 +92,14 @@ while True:
             termcolor.cprint("COMP", "green")
             print(complement)
 
+        # -- Implement REV command
+        elif "REV" in msg:
+            termcolor.cprint("REV", "green")
+            msg = msg.split()
+            seq = Seq(msg[1])
+            reverse = seq.reverse()
+            print(reverse)
+
         # -- Print the received message
 
             #print(f"Message received: {msg}")
