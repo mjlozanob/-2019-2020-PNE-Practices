@@ -34,6 +34,6 @@ class Client:
     def debug_talk(self, message):
         msg = self.talk(message)
         print("To server: ")
-        termcolor.cprint(message, 'red')
+        termcolor.cprint(message, 'magenta')
         print("From server: ")
         termcolor.cprint(msg, 'green')
