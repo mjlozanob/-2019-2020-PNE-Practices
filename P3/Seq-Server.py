@@ -1,6 +1,7 @@
 import socket
 import termcolor
 from Seq1 import *
+from Seq0 import *
 
 # Configure the Server's IP and PORT
 PORT = 8080
@@ -85,6 +86,7 @@ while True:
                 print(e, ":", round(percentage, 2), "%")
 
         # -- Implement COMP command
+        
         elif "COMP" in msg:
             msg = msg.split()
             seq = Seq(msg[1])
@@ -92,17 +94,21 @@ while True:
             termcolor.cprint("COMP", "green")
             print(complement)
 
-        # -- Implement REV command
-        elif "REV" in msg:
-            termcolor.cprint("REV", "green")
-            msg = msg.split()
-            seq = Seq(msg[1])
-            reverse = seq.reverse()
-            print(reverse)
+        # -- Implement REV command and GENE command
+        msg = msg.split()
+        new_msg = msg[1]
+        FOLDER = "../Session-04/"
+        gene_list = ["U5", "FRAT1", "ADA", "FXN"]
 
-        # -- Implement GENE command
-        elif "GENE" in msg:
-
+        if "REV" in msg:
+            if new_msg in gene_list:
+                sequence = seq_read_fasta(FOLDER + "../Session-04/" + new_msg + ".txt")
+                print(sequence)
+            else:
+                termcolor.cprint("REV", "green")
+                seq = Seq(new_msg)
+                reverse = seq.reverse()
+                print(reverse)
 
         # -- Print the received message
 

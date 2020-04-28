@@ -8,7 +8,7 @@ PORT = 8080
 c = Client(IP, PORT)
 print(c)
 
-msg = "REV AACCGTA"
+msg = "GET 2"
 response = c.talk(msg)
 print(msg)
 print(response)
