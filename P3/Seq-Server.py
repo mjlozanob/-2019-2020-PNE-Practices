@@ -58,6 +58,7 @@ while True:
             response = "OK!"
             termcolor.cprint("PING command!", "green")
             print(response)
+            cs.send(response.encode())
 
         # -- Split the message to identify the command
 
@@ -76,6 +77,7 @@ while True:
             index = int(msg[1])
             response = seq_list[index]
             print(response)
+            cs.send(response.encode())
 
         # -- Implement INFO command
 
@@ -88,16 +90,18 @@ while True:
             print("Total length: ", seq.len())
             for e in bases_list:
                 result = seq.count_base(e)
-                percentage = result * 100 / divisor
-                print(e, ":", round(percentage, 2), "%")
+                response = result * 100 / divisor
+                print(e, ":", round(response, 2), "%")
+                cs.send(response.encode())
 
         # -- Implement COMP command
 
         elif "COMP" in msg:
             termcolor.cprint("COMP", "green")
             seq = Seq(msg[1])
-            complement = seq.complement()
-            print(complement)
+            response = seq.complement()
+            print(response)
+            cs.send(response.encode())
 
         # -- Implement REV  and GENE command
 
@@ -107,22 +111,15 @@ while True:
         if "REV" in msg:
             if msg[1] in gene_list:
                 termcolor.cprint("GENE", "green")
-                seq = seq_read_fasta(FOLDER + "../Session-04/" + msg[1] + ".txt")
-                print(seq)
+                response = seq_read_fasta(FOLDER + "../Session-04/" + msg[1] + ".txt")
+                print(response)
             else:
                 termcolor.cprint("REV", "green")
                 seq = Seq(msg[1])
-                reverse = seq.reverse()
-                print(reverse)
+                response = seq.reverse()
+                print(response)
 
-        #-- Print the received message
-
-            #print(f"Message received: {msg}")
-            # -- Send a response message to the client
-            #response = "ECHO: " + msg
-
-        # -- The message has to be encoded into bytes
-        #cs.send(response.encode())
+            cs.send(response.encode())
 
         # -- Close the data socket
         cs.close()
