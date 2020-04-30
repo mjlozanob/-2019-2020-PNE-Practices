@@ -8,10 +8,7 @@ PORT = 8080
 c = Client(IP, PORT)
 print(c)
 
-print ('*Testing PING...')
-print (c.talk('OK!'))
-
-print('*Testing GET...')
-list = [0,1,2,3,4]
-for element in list:
-    print (c.talk(str(element)))
+response = c.talk("GET 2")
+response_2 = c.talk("INFO AAATT")
+print(response)
+print(response_2)
