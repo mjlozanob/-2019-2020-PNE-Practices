@@ -8,7 +8,7 @@ PORT = 8080
 c = Client(IP, PORT)
 print(c)
 
-response = c.talk("GET 2")
-response_2 = c.talk("INFO AAATT")
-print(response)
-print(response_2)
+# TEST GET
+print("* Testing GET...")
+for n in range(0,5):
+    print("Gene", n, c.talk(f"GET {n}"))
