@@ -53,64 +53,69 @@ while True:
         msg = msg_raw.decode()
 
         # -- Implement PING command
+
         if msg == "PING":
             response = "OK!"
             termcolor.cprint("PING command!", "green")
             print(response)
 
+        # -- Split the message to identify the command
+
+        msg = msg.split()
+
         # -- Implement GET command
+
         s1 = "AAC"
         s2 = "GTC"
         s3 = "TCT"
         s4 = "GTA"
         s5 = "TTG"
         seq_list = [s1, s2, s3, s4, s5]
-
         if "GET" in msg:
-            msg = msg.split()
+            termcolor.cprint("GET", "green")
             index = int(msg[1])
             response = seq_list[index]
-            termcolor.cprint("GET", "green")
             print(response)
 
         # -- Implement INFO command
+
         elif "INFO" in msg:
+            termcolor.cprint("INFO", "green")
             bases_list = ["A", "T", "G", "C"]
-            msg = msg.split()
             seq = Seq(msg[1])
             divisor = seq.len()
-            termcolor.cprint("INFO", "green")
+            print("Sequence: ", seq)
+            print("Total length: ", seq.len())
             for e in bases_list:
                 result = seq.count_base(e)
-                percentage = result*100/divisor
+                percentage = result * 100 / divisor
                 print(e, ":", round(percentage, 2), "%")
 
         # -- Implement COMP command
-        
+
         elif "COMP" in msg:
-            msg = msg.split()
+            termcolor.cprint("COMP", "green")
             seq = Seq(msg[1])
             complement = seq.complement()
-            termcolor.cprint("COMP", "green")
             print(complement)
 
-        # -- Implement REV command and GENE command
-        msg = msg.split()
-        new_msg = msg[1]
+        # -- Implement REV  and GENE command
+
         FOLDER = "../Session-04/"
         gene_list = ["U5", "FRAT1", "ADA", "FXN"]
 
         if "REV" in msg:
-            if new_msg in gene_list:
-                sequence = seq_read_fasta(FOLDER + "../Session-04/" + new_msg + ".txt")
-                print(sequence)
+            if msg[1] in gene_list:
+                termcolor.cprint("GENE", "green")
+                seq = seq_read_fasta(FOLDER + "../Session-04/" + msg[1] + ".txt")
+                print(seq)
             else:
                 termcolor.cprint("REV", "green")
-                seq = Seq(new_msg)
+                seq = Seq(msg[1])
                 reverse = seq.reverse()
                 print(reverse)
 
-        # -- Print the received message
+        #-- Print the received message
 
             #print(f"Message received: {msg}")
             # -- Send a response message to the client
