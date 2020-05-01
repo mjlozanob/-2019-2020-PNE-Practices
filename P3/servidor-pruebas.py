@@ -10,6 +10,8 @@ s4 = "GTA"
 s5 = "TTG"
 seq_list = [s1, s2, s3, s4, s5]
 bases_list = ["A", "T", "G", "C"]
+FOLDER = "../Session-04/"
+gene_list = ["U5", "FRAT1", "ADA", "FXN", "RNU6_269P"]
 
 # Configure the Server's IP and PORT
 PORT = 8080
@@ -85,13 +87,32 @@ while True:
             divisor = seq.len()
             print("Sequence: ", seq)
             print("Total length: ", seq.len())
-            flick = ""
+            string = ""
             for e in bases_list:
                 count = seq.count_base(e)
                 result = count * 100 / divisor
-                flick = flick + e + ":" +str(result)+"%\n"
+                string = string + e + ":" +str(result)+"%\n"
                 print(e, ":", round(result, 2), "%")
-            response = flick
+            response = "Total length: "+ str(seq.len())+"\n"+string
+
+        # -- Implement COMP command
+        elif "COMP" in msg:
+            termcolor.cprint("COMP", "green")
+            seq = Seq(msg[1])
+            response = "COMP "+seq.complement()
+            print(response)
+
+        # -- Implement REV and GENE command
+        if "REV" in msg:
+            if msg[1] in gene_list:
+                termcolor.cprint("GENE", "green")
+                response = "GENE: "+ msg[1]+ "\n"+seq_read_fasta(FOLDER + "../Session-04/" + msg[1] + ".txt")
+                print(response)
+            else:
+                termcolor.cprint("REV", "green")
+                seq = Seq(msg[1])
+                response = "REV "+seq.reverse()
+                print(response)
 
         # -- The message has to be encoded into bytes
         cs.send(response.encode())

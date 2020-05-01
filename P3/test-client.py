@@ -8,7 +8,25 @@ PORT = 8080
 c = Client(IP, PORT)
 print(c)
 
-# TEST GET
+# Testing GET
 print("* Testing GET...")
 for n in range(0,5):
     print("Gene", n, c.talk(f"GET {n}"))
+
+# Testing INFO
+print("* Testing INFO...")
+print("Sequence: AAC")
+print(c.talk("INFO AAC"))
+
+# Testing COMP
+print("* Testing COMP...")
+print(c.talk("COMP AAC"))
+
+# Testing REV
+print("* Testing REV...")
+print(c.talk("REV AAC"))
+
+# Testing GENE
+gene_list = ["REV U5", "REV FRAT1", "REV ADA", "REV FXN", "REV RNU6_269P"]
+for item in gene_list:
+    print(c.talk(item))
