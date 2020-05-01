@@ -31,7 +31,10 @@ def process_client(s):
     # Body (content to send)
 
     # This new contents are written in HTML language
-    body = Path("A.html").read_text()
+    if "info/A" in req:
+        body = Path("A.html").read_text()
+    elif "info/C" in req:
+        body = Path("C.html").read_text()
 
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
