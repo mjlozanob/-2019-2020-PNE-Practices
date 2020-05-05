@@ -19,7 +19,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
-        req_line = self.requestline.split('')
 
         # IN this simple server version:
         # We are NOT processing the client's request
@@ -27,14 +26,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # that everything is ok
 
         # Message to send back to the clinet
-        if req_line == '':
-            print("Main page requested")
-            contents = 'Welcome to my sever'
+        resource = self.requestline.split()
+        if resource[1] == "/":
+            contents = "Welcome to my server"
 
         else:
-            print("Error")
             contents = "Resource not available"
-
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
