@@ -15,46 +15,36 @@ socketserver.TCPServer.allow_reuse_address = True
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
-        """This method is called whenever the client invokes the GET method
-        in the HTTP protocol request"""
-
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
 
-        # IN this simple server version:
-        # We are NOT processing the client's request
-        # It is a happy server: It always returns a message saying
-        # that everything is ok
+        command = self.requestline.split(' ')
+        command2 = command[1]
+        command2 = command2[1:]
+        output = ''
+        print(command2)
 
-        # Message to send back to the client
-        req_line = self.requestline.split(' ')
-        resource = req_line[1]
-        resource = resource.replace("/","")
-        print(resource)
-        print(req_line)
-        code = 200
-
+        if command2 == "":
+            command2 = 'index.html'
         try:
-            if resource == "" or resource == "index.html":
-                contents = Path('index.html').read_text()
-            else:
-                contents = Path(resource).read_text()
-        except FileNotFoundError:
-            contents = Path("Error.html").read_text()
+            output = Path(command2).read_text()
+            code = 200
+        except:
+            print("ERROR")
+            output = Path('Error.html').read_text()
             code = 404
 
-        # Generating the response message
-        self.send_response(code)  # -- Status line: OK!
+        self.send_response(code)
 
         # Define the content-type header:
         self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', len(contents.encode()))
+        self.send_header('Content-Length', len(output.encode()))
 
         # The header is finished
         self.end_headers()
 
         # Send the response message
-        self.wfile.write(contents.encode())
+        self.wfile.write(output.encode())
 
         return
 
@@ -67,7 +57,6 @@ Handler = TestHandler
 
 # -- Open the socket server
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
-
     print("Serving at PORT", PORT)
 
     # -- Main loop: Attend the client. Whenever there is a new
