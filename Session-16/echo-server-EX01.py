@@ -30,13 +30,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print(req_line)
         code = 200
 
-        if resource == "/" or resource == "/echo":
+        if resource == "/" or resource == '/echo':
             contents = Path('form-1.html').read_text()
-        elif 'echo' in resource:
-            contents = Path('form-EX01.html')
+        elif 'msg' in resource:
+            msg = resource.split('=')
+            msg = msg[1]
+            contents = Path('form-EX01.html').read_text().format(p1=msg)
         else:
-            contents = Path("Error.html").read_text()
-            code = 404
+            contents = Path('Error.html').read_text()
 
         # Generating the response message
         self.send_response(code)  # -- Status line: OK!

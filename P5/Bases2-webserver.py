@@ -19,6 +19,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         in the HTTP protocol request"""
 
         # Print the request line
+        global contents
         termcolor.cprint(self.requestline, 'green')
 
         # Message to send back to the client

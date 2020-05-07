@@ -2,6 +2,7 @@ import http.server
 import socketserver
 import termcolor
 from pathlib import Path
+import re
 
 # Define the Server's port
 PORT = 8080
@@ -24,25 +25,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         # Open the form1.html file
         # Read the index from the file
-
-        req_line=self.requestline.split()
-        resource=req_line[1]
-        print(req_line)
+        req_line = self.requestline.split(' ')
+        resource = req_line[1]
         print(resource)
+        print(req_line)
+        code = 200
 
-        if resource == "/":
-            contents = Path('uwu.html').read_text()
-        elif 'echo' in resource:
-            msg=resource.split('=')
-            msg=msg[1]
-            contents = Path('uwu-2.html').read_text().format(first_header='UWU',p1=msg,p2='SUPER OWO')
+        if resource == "/" or resource == '/echo':
+            contents = Path('form-EX02.html').read_text()
+        elif 'chk=on' in resource:
+            msg = re.search('=(.+?)&', resource)
+            msg = msg.group(1)
+            msg = msg.upper()
+            contents = Path('echo-page.html').read_text().format(p1=msg)
         else:
             contents = Path('Error.html').read_text()
 
-
         # Generating the response message
-        self.send_response(200)  # -- Status line: OK!
-
+        self.send_response(code)  # -- Status line: OK!
 
         # Define the content-type header:
         self.send_header('Content-Type', 'text/html')
