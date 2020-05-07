@@ -9,9 +9,11 @@ import re
 # -- Tools
 # -- List of sequences
 seq_list = ["ATATATA", "CGCGCGC", "ACTGGCAT", "TAGCAGTAC","TTTGGGAA"]
-# -- Folder to access genes
+# -- Tools to access genes
 FOLDER = "../Session-04/"
 end = ".txt"
+# -- Bases
+bases_list=["A","C","T","G"]
 # Define the Server's port
 PORT = 8080
 
@@ -53,6 +55,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             msg = msg[1]
             file = seq_read_fasta(FOLDER + msg + end)
             contents = Path('gene.html').read_text().format(gene=msg,seq=file)
+        elif '/operation' in resource:
+            msg = re.search('=(.+?)&', resource)
+            msg = Seq(msg.group(1))
+            divisor = msg.len()
+            result_str =''
+            if 'info' in resource:
+                for e in bases_list:
+                    count = msg.count_base(e)
+                    result = round(count * 100 / divisor, 2)
+                    result_str= result_str + e + ':'+ str(result)+'%\n'
+                contents = Path('operation.html').read_text().format(ans=result_str,sequence=msg, op='info')
+            elif 'comp' in resource:
+                comp = msg.complement()
+                contents = Path('operation.html').read_text().format(ans=comp, sequence=msg, op='comp')
+            elif 'rev' in resource:
+                rev = msg.reverse()
+                contents = Path('operation.html').read_text().format(ans=rev, sequence=msg, op='rev')
+
         else:
             contents = Path('Error.html').read_text()
 
