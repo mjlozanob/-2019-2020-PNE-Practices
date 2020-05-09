@@ -33,16 +33,17 @@ person = json.loads(data1)
 
 print("CONTENT: ")
 
-# Print the information in the object
-for a in person:
+# Print the information on the console, in colors
+print("Total people in the database:", len(person))
+for e in person:
     print()
     termcolor.cprint("Name: ", 'green', end="")
-    print(a['Firstname'], a['Lastname'])
+    print(e['Firstname'], e['Lastname'])
     termcolor.cprint("Age: ", 'green', end="")
-    print(a['age'])
+    print(e['age'])
 
 # Get the phoneNumber list
-    phoneNumbers = a['phoneNumber']
+    phoneNumbers = e['phoneNumber']
 
 # Print the number of elements in the list
     termcolor.cprint("Phone numbers: ", 'green', end='')
