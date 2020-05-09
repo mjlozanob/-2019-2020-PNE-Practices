@@ -2,7 +2,7 @@ import http.client
 import json
 
 SERVER = 'rest.ensembl.org'
-ENDPOINT = '/info/ping'
+ENDPOINT = '/sequence/id/ENSG00000080603'
 PARAMS = '?content-type=application/json'
 URL = SERVER + ENDPOINT + PARAMS
 
@@ -30,9 +30,7 @@ print(f"Response received!: {r1.status} {r1.reason}\n")
 # -- Read the response's body
 data1 = r1.read().decode("utf-8")
 response = json.loads(data1)
-ping = response['ping']
-if ping == 1:
-    print('PING OK! The database is running')
+print(response['desc'])
+print(response['seq'])
 
 # -- Print the received data
-print(f"CONTENT: {data1}")
