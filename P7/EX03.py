@@ -1,8 +1,9 @@
 import http.client
 import json
+import termcolor
 
 SERVER = 'rest.ensembl.org'
-ENDPOINT = '/sequence/id/ENSG00000080603'
+ENDPOINT = '/sequence/id/ENSG00000207552'
 PARAMS = '?content-type=application/json'
 URL = SERVER + ENDPOINT + PARAMS
 
@@ -30,7 +31,12 @@ print(f"Response received!: {r1.status} {r1.reason}\n")
 # -- Read the response's body
 data1 = r1.read().decode("utf-8")
 response = json.loads(data1)
+
+# -- Print data
+termcolor.cprint('GENE: ', 'green', end='')
+print('MIR633')
+termcolor.cprint('Description: ', 'green', end='')
 print(response['desc'])
+termcolor.cprint('Bases: ', 'green', end='')
 print(response['seq'])
 
-# -- Print the received data
