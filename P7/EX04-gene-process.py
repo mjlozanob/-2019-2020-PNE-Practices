@@ -3,6 +3,8 @@ import json
 import termcolor
 from Seq1 import *
 
+user_gene= input("Enter a gene: ")
+
 SERVER = 'rest.ensembl.org'
 ENDPOINT = '/sequence/id/ENSG00000165879'
 PARAMS = '?content-type=application/json'
@@ -39,7 +41,7 @@ seq = Seq(response['seq'])
 max_count = 0
 # -- Print data
 termcolor.cprint('GENE: ', 'green', end='')
-print('FRAT1')
+print(user_gene)
 termcolor.cprint('Description: ', 'green', end='')
 print(response['desc'])
 termcolor.cprint('Total lengh: ', 'green', end='')
