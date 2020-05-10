@@ -3,7 +3,7 @@ import json
 import termcolor
 from Seq1 import *
 
-user_gene= input("Enter a gene: ")
+user_gene= input("Write the gene name: ")
 
 SERVER = 'rest.ensembl.org'
 ENDPOINT = '/sequence/id/ENSG00000165879'
