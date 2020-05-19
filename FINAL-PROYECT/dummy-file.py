@@ -1,6 +1,10 @@
+import http.server
+import socketserver
+from pathlib import Path
 import http.client
 import json
 import termcolor
+import re
 
 SERVER = 'rest.ensembl.org'
 ENDPOINT = '/sequence/id/ENSG00000207552'
@@ -37,16 +41,17 @@ termcolor.cprint('GENE: ', 'green', end='')
 print('MIR633')
 termcolor.cprint('Description: ', 'green', end='')
 print(response['desc'])
+x = response['desc']
 termcolor.cprint('Bases: ', 'green', end='')
 print(response['seq'])
 
-# Define the Server's port
-PORT = 8080
+# -- Put data in html file
 
+# Define the server's port
+PORT = 8080
 
 # -- This is for preventing the error: "Port already in use"
 socketserver.TCPServer.allow_reuse_address = True
-
 
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
 # It means that our class inheritates all his methods and properties
@@ -68,8 +73,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         code = 200
 
         if resource == "/":
-            contents = Path('dummy.html').read_text()
-            # Generating the response message
+            contents = Path('dummy.html').read_text().format(p1=response['seq'])
+        else:
+            contents = Path('Error.html').read_text()
+
+        # Generating the response message
         self.send_response(code)  # -- Status line: OK!
 
         # Define the content-type header:
@@ -83,6 +91,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(str.encode(contents))
 
         return
+
+
 # ------------------------
 # - Server MAIN program
 # ------------------------
