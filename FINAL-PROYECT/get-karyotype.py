@@ -7,7 +7,7 @@ import termcolor
 import re
 
 SERVER = 'rest.ensembl.org'
-ENDPOINT = '/sequence/id/ENSG00000207552'
+ENDPOINT = '/info/assembly/rabbit'
 PARAMS = '?content-type=application/json'
 URL = SERVER + ENDPOINT + PARAMS
 
@@ -37,13 +37,10 @@ data1 = r1.read().decode("utf-8")
 response = json.loads(data1)
 
 # -- Print data
-termcolor.cprint('GENE: ', 'green', end='')
-print('MIR633')
-termcolor.cprint('Description: ', 'green', end='')
-print(response['desc'])
-x = response['desc']
-termcolor.cprint('Bases: ', 'green', end='')
-print(response['seq'])
+karyotype = response['karyotype']
+string = ''
+for element in karyotype:
+    string = string + element
 
 # -- Put data in html file
 
@@ -73,7 +70,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         code = 200
 
         if resource == "/":
-            contents = Path('dummy.html').read_text().format(p1=response['seq'])
+            contents = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Just testing...</h1>
+    <p1>{string}</p1>
+
+</body>
+</html>"""
         else:
             contents = Path('Error.html').read_text()
 
