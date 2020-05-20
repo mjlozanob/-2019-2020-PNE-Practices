@@ -73,7 +73,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 <title>Title</title>
             </head>
             <body>
-                <h1>Just testing...</h1>
+                <h1>Karyotype</h1>
                 <p1>{string}</p1>
 
             </body>
