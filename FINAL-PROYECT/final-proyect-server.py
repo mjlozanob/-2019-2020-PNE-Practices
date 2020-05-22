@@ -4,7 +4,6 @@ from pathlib import Path
 import http.client
 import json
 import termcolor
-import re
 
 # Data to connect to ensembl
 SERVER = 'rest.ensembl.org'
@@ -36,30 +35,58 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         if resource == "/":
             contents = Path('index.html').read_text()
+
+        elif '/listSpecies' in resource:
+            ENDPOINT = '/info/species/'
+            # -- Get info from server
+            conn = http.client.HTTPConnection(SERVER)
+            try:
+                conn.request("GET", ENDPOINT + PARAMS)
+            except ConnectionRefusedError:
+                print("ERROR! Cannot connect to the Server")
+                exit()
+            r1 = conn.getresponse()
+            data1 = r1.read().decode("utf-8")
+            response = json.loads(data1)
+            # -- Elaborate response
+            species = response['species']
+            count = 0
+            result = ''
+            for i in species:
+                result = result + '\n' + i['common_name']
+                count = count + 1
+
+            contents = f"""<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Species</title>
+            </head>
+            <body style="background-color: springgreen;">
+                <h1>The total number of species in ensemble are: </h1>
+                <textarea style="border: none; overflow: hidden" rows={count}>
+                {result}    
+            </textarea>
+            </body>
+            </html>"""
+
         elif '/karyotype' in resource:
             ENDPOINT = '/info/assembly/'
             SPECIE = resource.split('=')
             SPECIE = SPECIE[1]
 
-            # Connect with the server
             conn = http.client.HTTPConnection(SERVER)
 
-            # -- Send the request message, using the GET method. We are
-            # -- requesting the main page (/)
             try:
                 conn.request("GET", ENDPOINT + SPECIE + PARAMS)
             except ConnectionRefusedError:
                 print("ERROR! Cannot connect to the Server")
                 exit()
 
-            # -- Read the response message from the server
             r1 = conn.getresponse()
 
-            # -- Read the response's body
             data1 = r1.read().decode("utf-8")
             response = json.loads(data1)
-
-            # -- Put data in html file
 
             karyotype = response['karyotype']
             string = ''
@@ -70,18 +97,59 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>Title</title>
+                <title>Karyotype</title>
             </head>
-            <body>
-                <h1>Karyotype</h1>
+            <body style="background-color: springgreen;">
+                <h1>The names of the chromosomes are: </h1>
                 <p1>{string}</p1>
 
             </body>
             </html>"""
 
+        elif '/chromosomeLength' in resource:
+            ENDPOINT = '/info/assembly/'
+            INFO = resource.split('&')
+            specie = INFO[0].split('=')
+            specie = specie[1]
+            number = INFO[1].split('=')
+            number = int(number[1])
+            # Connect with the server
+            conn = http.client.HTTPConnection(SERVER)
+
+            # -- Send the request message, using the GET method. We are
+            # -- requesting the main page (/)
+            try:
+                conn.request("GET", ENDPOINT + specie + PARAMS)
+            except ConnectionRefusedError:
+                print("ERROR! Cannot connect to the Server")
+                exit()
+
+            r1 = conn.getresponse()
+
+            data1 = r1.read().decode("utf-8")
+            response = json.loads(data1)
+
+            data2 = response['top_level_region']
+            list = []
+            for i in data2:
+                list.append(i['length'])
+            ans = list[number-1]
+            contents = f"""<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Chromosome length</title>
+            </head>
+            <body style="background-color: springgreen;">
+                <h1>Chromosome length</h1>
+                <p1> The length of the chromosome {number} is: {ans}<p1>
+
+            </body>
+            </html>"""
+
+
         else:
             contents = Path('error.html').read_text()
-
 
 
         # Generating the response message
@@ -103,7 +171,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 # ------------------------
 # - Server MAIN program
 # ------------------------
-# -- Set the new handler
 Handler = TestHandler
 
 # -- Open the socket server
