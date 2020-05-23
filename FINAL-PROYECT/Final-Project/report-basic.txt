@@ -1,0 +1,29 @@
+Test report
+===========
+
+
+--> Main endpoint
+*TEST 0:
+*Input:
+
+--> listSpecies endpoint
+* TEST 1:
+* Input: http://127.0.0.1:8080/listSpecies
+* TEST 2:
+* Input: http://127.0.0.1:8080/listSpecies?limit=4
+* TEST 3:
+* Input: http://127.0.0.1:8080/listSpecies?limit=hello
+
+--> karyotype endpoint
+TEST 4:
+Input:
+TEST 5:
+Input:
+
+--> chromosomeLength endpoint
+TEST 6:
+Input:
+TEST 7:
+Input:
+TEST 8:
+Input:
