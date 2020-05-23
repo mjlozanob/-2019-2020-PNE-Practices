@@ -32,6 +32,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print(resource)
         print(req_line)
         code = 200
+        count = 0
 
         if resource == "/":
             contents = Path('index.html').read_text()
@@ -50,7 +51,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             response = json.loads(data1)
             # -- Elaborate response
             species = response['species']
-            count = 0
             result = ''
             for i in species:
                 result = result + '\n' + i['common_name']
@@ -64,88 +64,99 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             </head>
             <body style="background-color: springgreen;">
                 <h1>The total number of species in ensemble are: </h1>
-                <textarea style="border: none; overflow: hidden" rows={count}>
+                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows={count}>
                 {result}    
             </textarea>
             </body>
             </html>"""
 
         elif '/karyotype' in resource:
-            ENDPOINT = '/info/assembly/'
-            SPECIE = resource.split('=')
-            SPECIE = SPECIE[1]
-
-            conn = http.client.HTTPConnection(SERVER)
-
             try:
-                conn.request("GET", ENDPOINT + SPECIE + PARAMS)
-            except ConnectionRefusedError:
-                print("ERROR! Cannot connect to the Server")
-                exit()
+                ENDPOINT = '/info/assembly/'
+                SPECIE = resource.split('=')
+                SPECIE = SPECIE[1]
 
-            r1 = conn.getresponse()
+                conn = http.client.HTTPConnection(SERVER)
 
-            data1 = r1.read().decode("utf-8")
-            response = json.loads(data1)
+                try:
+                    conn.request("GET", ENDPOINT + SPECIE + PARAMS)
+                except ConnectionRefusedError:
+                    print("ERROR! Cannot connect to the Server")
+                    exit()
 
-            karyotype = response['karyotype']
-            string = ''
-            for element in karyotype:
-                string = string + element
+                r1 = conn.getresponse()
 
-            contents = f"""<!DOCTYPE html>
+                data1 = r1.read().decode("utf-8")
+                response = json.loads(data1)
+
+                karyotype = response['karyotype']
+                string = ''
+                for element in karyotype:
+                    string = string + '\n' + element
+                    count = count + 1
+
+                contents = f"""<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>Karyotype</title>
+                <title>Species</title>
             </head>
             <body style="background-color: springgreen;">
                 <h1>The names of the chromosomes are: </h1>
-                <p1>{string}</p1>
-
+                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows={count}>
+                {string}    
+            </textarea>
             </body>
             </html>"""
+            except KeyError:
+                contents = Path('error.html').read_text()
+
 
         elif '/chromosomeLength' in resource:
-            ENDPOINT = '/info/assembly/'
-            INFO = resource.split('&')
-            specie = INFO[0].split('=')
-            specie = specie[1]
-            number = INFO[1].split('=')
-            number = int(number[1])
-            # Connect with the server
-            conn = http.client.HTTPConnection(SERVER)
-
-            # -- Send the request message, using the GET method. We are
-            # -- requesting the main page (/)
             try:
-                conn.request("GET", ENDPOINT + specie + PARAMS)
-            except ConnectionRefusedError:
-                print("ERROR! Cannot connect to the Server")
-                exit()
+                ENDPOINT = '/info/assembly/'
+                INFO = resource.split('&')
+                specie = INFO[0].split('=')
+                specie = specie[1]
+                number = INFO[1].split('=')
+                number = int(number[1])
+                # Connect with the server
+                conn = http.client.HTTPConnection(SERVER)
 
-            r1 = conn.getresponse()
+                # -- Send the request message, using the GET method. We are
+                # -- requesting the main page (/)
+                try:
+                    conn.request("GET", ENDPOINT + specie + PARAMS)
+                except ConnectionRefusedError:
+                    print("ERROR! Cannot connect to the Server")
+                    exit()
 
-            data1 = r1.read().decode("utf-8")
-            response = json.loads(data1)
+                r1 = conn.getresponse()
 
-            data2 = response['top_level_region']
-            list = []
-            for i in data2:
-                list.append(i['length'])
-            ans = list[number-1]
-            contents = f"""<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Chromosome length</title>
-            </head>
-            <body style="background-color: springgreen;">
-                <h1>Chromosome length</h1>
-                <p1> The length of the chromosome {number} is: {ans}<p1>
+                data1 = r1.read().decode("utf-8")
+                response = json.loads(data1)
 
-            </body>
-            </html>"""
+                data2 = response['top_level_region']
+                list = []
+                for i in data2:
+                    list.append(i['length'])
+                ans = list[number - 1]
+                contents = f"""<!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>Chromosome length</title>
+                            </head>
+                            <body style="background-color: springgreen;">
+                                <h1>Chromosome length</h1>
+                                <p1> The length of the chromosome {number} is: {ans}<p1>
+
+                            </body>
+                            </html>"""
+            except IndexError:
+                contents = Path('error.html').read_text()
+            except KeyError:
+                contents = Path('error.html').read_text()
 
 
         else:
