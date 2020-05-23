@@ -37,7 +37,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if resource == "/":
             contents = Path('index.html').read_text()
 
-        elif '/listSpecies' in resource:
+        elif resource == '/listSpecies':
             ENDPOINT = '/info/species/'
             # -- Get info from server
             conn = http.client.HTTPConnection(SERVER)
@@ -55,39 +55,67 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             string = ''
             for element in info:
                 species.append(element['common_name'])
-
-            if resource == '/listSpecies':
-                for i in species:
-                    string = string + '\n' + i
-                    count = count + 1
-            elif 'limit' in resource:
-                LIMIT = resource.split('=')
-                LIMIT = LIMIT[1]
+            for i in species:
+                string = string + '\n' + i
+                count = count + 1
+            contents = f"""<!DOCTYPE html>
+                       <html lang="en">
+                       <head>
+                           <meta charset="UTF-8">
+                           <title>Species</title>
+                       </head>
+                       <body style="background-color: springgreen;">
+                           <h1>The total number of species in ensemble are: </h1>
+                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
+                           {string}    
+                       </textarea>
+                       </body>
+                       </html>"""
+        elif 'limit' in resource:
+            ENDPOINT = '/info/species/'
+            LIMIT = resource.split('=')
+            LIMIT = LIMIT[1]
+            # -- Get info from server
+            conn = http.client.HTTPConnection(SERVER)
+            try:
+                conn.request("GET", ENDPOINT + PARAMS)
+            except ConnectionRefusedError:
+                print("ERROR! Cannot connect to the Server")
+                exit()
+            r1 = conn.getresponse()
+            data1 = r1.read().decode("utf-8")
+            response = json.loads(data1)
+            # -- Elaborate response
+            info = response['species']
+            species = []
+            string = ''
+            for element in info:
+                species.append(element['common_name'])
+            try:
                 if LIMIT == '':
                     for i in species:
                         string = string + '\n' + i
                         count = count + 1
-                LIMIT = int(LIMIT) + 1
-                for i in species[:LIMIT]:
-                    string = string + '\n' + i
-                    count = count + 1
-                print('the count is: ', count)
-                print('the limit is: ', LIMIT)
-                print('the string is: ')
-
-            contents = f"""<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Species</title>
-            </head>
-            <body style="background-color: springgreen;">
-                <h1>The total number of species in ensemble are: </h1>
-                <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
-                {string}    
-            </textarea>
-            </body>
-            </html>"""
+                else:
+                    LIMIT = int(LIMIT)
+                    for i in species[:LIMIT + 1]:
+                        string = string + '\n' + i
+                        count = count + 1
+                contents = f"""<!DOCTYPE html>
+                                       <html lang="en">
+                                       <head>
+                                           <meta charset="UTF-8">
+                                           <title>Species</title>
+                                       </head>
+                                       <body style="background-color: springgreen;">
+                                           <h1>The total number of species in ensemble are: </h1>
+                                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
+                                           {string}    
+                                       </textarea>
+                                       </body>
+                                       </html>"""
+            except ValueError:
+                contents = Path('error.html').read_text()
 
         elif '/karyotype' in resource:
             try:
@@ -168,7 +196,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </head>
                             <body style="background-color: springgreen;">
                                 <h1>Chromosome length</h1>
-                                <p1> The length of the chromosome {number} is: {ans}<p1>
+                                <p1> The length of the chromosome is: {ans}<p1>
 
                             </body>
                             </html>"""
@@ -176,8 +204,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = Path('error.html').read_text()
             except KeyError:
                 contents = Path('error.html').read_text()
-
-
+            except ValueError:
+                contents = Path('error.html').read_text()
         else:
             contents = Path('error.html').read_text()
 
