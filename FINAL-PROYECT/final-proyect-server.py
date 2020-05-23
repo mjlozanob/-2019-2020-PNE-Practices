@@ -50,11 +50,30 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             data1 = r1.read().decode("utf-8")
             response = json.loads(data1)
             # -- Elaborate response
-            species = response['species']
-            result = ''
-            for i in species:
-                result = result + '\n' + i['common_name']
-                count = count + 1
+            info = response['species']
+            species = []
+            string = ''
+            for element in info:
+                species.append(element['common_name'])
+
+            if resource == '/listSpecies':
+                for i in species:
+                    string = string + '\n' + i
+                    count = count + 1
+            elif 'limit' in resource:
+                LIMIT = resource.split('=')
+                LIMIT = LIMIT[1]
+                if LIMIT == '':
+                    for i in species:
+                        string = string + '\n' + i
+                        count = count + 1
+                LIMIT = int(LIMIT) + 1
+                for i in species[:LIMIT]:
+                    string = string + '\n' + i
+                    count = count + 1
+                print('the count is: ', count)
+                print('the limit is: ', LIMIT)
+                print('the string is: ')
 
             contents = f"""<!DOCTYPE html>
             <html lang="en">
@@ -64,8 +83,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             </head>
             <body style="background-color: springgreen;">
                 <h1>The total number of species in ensemble are: </h1>
-                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows={count}>
-                {result}    
+                <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
+                {string}    
             </textarea>
             </body>
             </html>"""
