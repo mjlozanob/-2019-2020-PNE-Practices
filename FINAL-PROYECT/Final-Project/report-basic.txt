@@ -1,6 +1,44 @@
 Test report
 ===========
 
+--> Main endpoint
+
+*TEST 0:
+
+* Input: http://127.0.0.1:8080/
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!!</title>
+</head>
+<body style="background-color: cornflowerblue;">
+    <h1>Browsing Human and Vertebrates genome</h1>
+    <h2>BASIC Level Services</h2>
+    <form action="listSpecies" method="get">
+    <p1>1)List of species in the genome database</p1> <br><br>
+    <p1>Limit:</p1>
+    <input type="text" name="limit"> <br><br>
+    <input type="submit" value="SEND"> <br> <br>
+    </form>
+    <p2>2)Information about the karyotype</p2> <br><br>
+     <form action="karyotype" method="get">
+    <p2>Select the species:</p2>
+    <input type="text" name="specie"> <br><br>
+    <input type="submit" value="SEND"> <br><br>
+    </form>
+    <p3>3)Chromosome Length</p3> <br><br>
+    <form action="chromosomeLength" method="get">
+    <p3>Select the species</p3>
+    <input type="text" name="specie"> <br><br>
+    <p1>Select a chromosome</p1>
+    <input type="text" name="chromo"> <br><br>
+    <input type="submit" value="SEND">
+</body>
+</html>
 
 --> listSpecies endpoint
 
@@ -315,7 +353,7 @@ blue-crowned manakin
 
 * Input: http://127.0.0.1:8080/listSpecies?limit=4
 
-*Output:
+* Output:
 
 <!DOCTYPE html>
                            <html lang="en">
@@ -362,9 +400,9 @@ sperm whale
 
 TEST 4:
 
-*Input: http://127.0.0.1:8080/karyotype?specie=human
+* Input: http://127.0.0.1:8080/karyotype?specie=human
 
-*Output:
+* Output:
 
 <!DOCTYPE html>
             <html lang="en">
@@ -407,9 +445,9 @@ MT
 
 TEST 5:
 
-*Input: http://127.0.0.1:8080/karyotype?specie=rabbit
+* Input: http://127.0.0.1:8080/karyotype?specie=rabbit
 
-*Output:
+* Output:
 
 <!DOCTYPE html>
             <html lang="en">
@@ -453,9 +491,9 @@ MT
 
 TEST 6:
 
-*Input: http://127.0.0.1:8080/chromosomeLength?specie=mouse&chromo=18
+* Input: http://127.0.0.1:8080/chromosomeLength?specie=mouse&chromo=18
 
-*Output:
+* Output:
 
 <!DOCTYPE html>
                             <html lang="en">
@@ -472,9 +510,9 @@ TEST 6:
 
 TEST 7:
 
-*Input: http://127.0.0.1:8080/chromosomeLength?specie=human&chromo=5
+* Input: http://127.0.0.1:8080/chromosomeLength?specie=human&chromo=5
 
-*Output:
+* Output:
 
 <!DOCTYPE html>
                             <html lang="en">
