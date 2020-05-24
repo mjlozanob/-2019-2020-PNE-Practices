@@ -2,28 +2,489 @@ Test report
 ===========
 
 
---> Main endpoint
-*TEST 0:
-*Input:
-
 --> listSpecies endpoint
+
 * TEST 1:
+
 * Input: http://127.0.0.1:8080/listSpecies
+
+* Output:
+
+<!DOCTYPE html>
+                       <html lang="en">
+                       <head>
+                           <meta charset="UTF-8">
+                           <title>Species</title>
+                       </head>
+                       <body style="background-color: springgreen;">
+                           <p1>The total number of species in ensemble is: 286</p1> <br>
+                           <p1>The names of the species are</p1> <br> <br>
+                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows=286>
+
+pig
+American pika
+African ostrich
+Nile tilapia
+channel catfish
+West African mud turtle
+channel bull blenny
+Sooty mangabey
+bottlenosed dolphin
+naked mole-rat
+brown trout
+eastern brown snake
+south eastern house mouse
+spiny chromis
+Western Lowland Gorilla
+silver-eye
+Hoffmann's two-fingered sloth
+Eurasian sparrowhawk
+house mouse
+sailfin molly
+greater bamboo lemur
+mangrove rivulus
+platypus
+live sharksucker
+large flying fox
+house mouse
+Domestic ferret
+coelacanth
+lion
+Siamese fighting fish
+pig
+Brazilian guinea pig
+sheepshead minnow
+beluga whale
+domestic yak
+orbiculate cardinalfish
+Chinese hamster
+Kakapo
+Bornean orangutan
+Daurian ground squirrel
+pig
+house mouse
+common carp huanghe
+Three-toed box turtle
+tongue sole
+chimpanzee
+Ma's night monkey
+red-bellied piranha
+pig
+Drill
+green anole
+common mallard
+common carp german mirror
+birds
+white-tufted-ear marmoset
+Chinese medaka
+greater amberjack
+house mouse
+dark-eyed junco
+house mouse
+Arctic ground squirrel
+pig
+mallard
+dog
+Great Tit
+pig
+mainland tiger snake
+pig
+small Madagascar hedgehog
+climbing perch
+tuatara
+wild yak
+small-eared galago
+Degu
+Siberian musk deer
+northern pike
+pig
+gilthead seabream
+Ord's kangaroo rat
+Ring-necked pheasant
+mummichog
+American mink
+Tasmanian devil
+horned golden-line barbel
+Shrew mouse
+Golden Hamster
+Pachon cavefish
+eastern european house mouse
+hybrid cattle
+Canada lynx
+tammar wallaby
+Argentine black and white tegu
+Monterrey platyfish
+blue tit
+Japanese quail
+little brown bat
+giant panda
+Chinook salmon
+western European hedgehog
+Ryukyu mouse
+Chinese hamster
+northern tree shrew
+central bearded dragon
+Amazon molly
+helmeted guineafowl
+three-spined stickleback
+Northern American deer mouse
+baker's yeast
+dog
+golden eagle
+tiger tail seahorse
+Chacoan peccary
+Japanese medaka HdrR
+sea lamprey
+Mexican tetra
+Common snapping turtle
+American black bear
+Okarito brown kiwi
+Gouldian finch
+Mongolian gerbil
+Sea squirt Ciona intestinalis
+house mouse
+Great spotted kiwi
+western mosquitofish
+Periophthalmus magnuspinnatus
+house mouse
+Collared flycatcher
+yellow-billed parrot
+house mouse
+Pig-tailed macaque
+dingo
+rainbow trout
+alpaca
+zig-zag eel
+Inshore hagfish
+common carp
+nine-banded armadillo
+pig
+gray short-tailed opossum
+lyretail cichlid
+Goat
+barramundi perch
+small tree finch
+western european house mouse
+American beaver
+pig
+elephant shark
+sperm whale
+Spotted gar
+house mouse
+blue tilapia
+southern platyfish
+medium ground-finch
+Paramormyrops kingsleyae
+Philippine tarsier
+common wall lizard
+swan goose
+blue-ringed sea krait
+common canary
+Chinese hamster
+African green monkey
+golden-collared manakin
+Long-tailed chinchilla
+zebra finch
+Sea squirt Ciona savignyi
+Norway rat
+ocean sunfish
+little spotted kiwi
+Indian medaka
+cattle
+leopard
+Atlantic salmon
+Alpine marmot
+large yellow croaker
+Upper Galilee mountains blind mole rat
+Goodes thornscrub tortoise
+Indian peafowl
+common carp hebao red
+denticle herring
+koala
+Midas cichlid
+golden-line barbel
+turbot
+ruff
+pig
+pig
+human
+burrowing owl
+Atlantic cod
+Burton's mouthbrooder
+donkey
+domestic guinea pig
+clown anemonefish
+golden pheasant
+Domestic sheep
+red fox
+bonobo
+Indian glassy fish
+spotted green pufferfish
+ballan wrasse
+pig
+hybrid cattle
+Budgie
+meerkat
+European seabass
+African savanna elephant
+emu
+Tiger
+fruit fly
+steppe mouse
+swamp eel
+Japanese medaka HNI
+jewelled blenny
+house mouse
+zebra mbuna
+white-throated sparrow
+Western painted turtle
+zebrafish
+goldfish
+horse
+greater horseshoe bat
+eastern happy
+tropical clawed frog
+Spoon-billed sandpiper
+Angola colobus
+algerian mouse
+dog
+Macaque
+thirteen-lined ground squirrel
+gray mouse lemur
+common wombat
+rabbit
+Polar bear
+Atlantic herring
+chicken
+fugu
+bicolor damselfish
+house mouse
+reedfish
+Chinese softshell turtle
+blunt-snouted clingfish
+C.elegans
+Coquerel's sifaka
+Agassiz's desert tortoise
+guppy
+javanese ricefish
+Makobe Island cichlid
+vole
+gelada
+pinecone soldierfish
+Arabian camel
+Japanese medaka HSOK
+Asiatic black bear
+Bengalese finch
+cape rock hyrax
+domestic turkey
+European shrew
+Golden snub-nosed monkey
+Black snub-nosed monkey
+round goby
+Asian bonytongue
+electric eel
+American bison
+shortfin molly
+orange clownfish
+Komodo dragon
+blind barbel
+Ugandan red Colobus
+Olive baboon
+Lesser Egyptian jerboa
+domestic cat
+pink-footed goose
+White-headed capuchin
+Australian saltwater crocodile
+naked mole-rat
+house mouse
+Abingdon island giant tortoise
+Northern white-cheeked gibbon
+house mouse
+yellowtail amberjack
+Bolivian squirrel monkey
+Crab-eating macaque
+Damara mole rat
+huchen
+rufous-capped babbler
+blue-crowned manakin
+                       </textarea>
+                       </body>
+                       </html>
+
 * TEST 2:
+
 * Input: http://127.0.0.1:8080/listSpecies?limit=4
+
+*Output:
+
+<!DOCTYPE html>
+                           <html lang="en">
+                           <head>
+                               <meta charset="UTF-8">
+                               <title>Species</title>
+                           </head>
+                           <body style="background-color: springgreen;">
+                               <p1>The total number of species in ensemble are: 286</p1> <br>
+                               <p1>The limit you have selected is: 4</p1> <br>
+                               <p1>The names of the species are: </p1> <br> <br>
+                               <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows=4>
+mainland tiger snake
+birds
+red fox
+sperm whale
+                               </textarea>
+                               </body>
+                               </html>
+
+
 * TEST 3:
+
 * Input: http://127.0.0.1:8080/listSpecies?limit=hello
 
+* Output:
+
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Green server</title>
+      </head>
+      <body style="background-color: red;">
+        <h1>ERROR</h1>
+        <p>Resource not available</p>
+        <a href="http://127.0.0.1:8080/">Main page</a>
+
+
+      </body>
+    </html>
+
 --> karyotype endpoint
+
 TEST 4:
-Input:
+
+*Input: http://127.0.0.1:8080/karyotype?specie=human
+
+*Output:
+
+<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Species</title>
+            </head>
+            <body style="background-color: springgreen;">
+                <h1>The names of the chromosomes are: </h1>
+                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows=25>
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+X
+Y
+MT
+            </textarea>
+            </body>
+            </html>
+
 TEST 5:
-Input:
+
+*Input: http://127.0.0.1:8080/karyotype?specie=rabbit
+
+*Output:
+
+<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Species</title>
+            </head>
+            <body style="background-color: springgreen;">
+                <h1>The names of the chromosomes are: </h1>
+                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows=25>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+X
+MT
+MT
+MT
+            </textarea>
+            </body>
+            </html>
 
 --> chromosomeLength endpoint
+
 TEST 6:
-Input:
+
+*Input: http://127.0.0.1:8080/chromosomeLength?specie=mouse&chromo=18
+
+*Output:
+
+<!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>Chromosome length</title>
+                            </head>
+                            <body style="background-color: springgreen;">
+                                <h1>Chromosome length</h1>
+                                <p1> The length of the chromosome is: 336933<p1>
+
+                            </body>
+                            </html>
+
 TEST 7:
-Input:
-TEST 8:
-Input:
+
+*Input: http://127.0.0.1:8080/chromosomeLength?specie=human&chromo=5
+
+*Output:
+
+<!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <title>Chromosome length</title>
+                            </head>
+                            <body style="background-color: springgreen;">
+                                <h1>Chromosome length</h1>
+                                <p1> The length of the chromosome is: 73985<p1>
+
+                            </body>
+                            </html>

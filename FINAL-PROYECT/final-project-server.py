@@ -65,9 +65,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                            <title>Species</title>
                        </head>
                        <body style="background-color: springgreen;">
-                           <h1>The total number of species in ensemble are: </h1>
-                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
-                           {string}    
+                           <p1>The total number of species in ensemble is: 286</p1> <br>
+                           <p1>The names of the species are</p1> <br> <br>
+                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>{string}    
                        </textarea>
                        </body>
                        </html>"""
@@ -98,22 +98,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         count = count + 1
                 else:
                     LIMIT = int(LIMIT)
-                    for i in species[:LIMIT + 1]:
+                    for i in species[:LIMIT]:
                         string = string + '\n' + i
                         count = count + 1
                 contents = f"""<!DOCTYPE html>
-                                       <html lang="en">
-                                       <head>
-                                           <meta charset="UTF-8">
-                                           <title>Species</title>
-                                       </head>
-                                       <body style="background-color: springgreen;">
-                                           <h1>The total number of species in ensemble are: </h1>
-                                           <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>
-                                           {string}    
-                                       </textarea>
-                                       </body>
-                                       </html>"""
+                           <html lang="en">
+                           <head>
+                               <meta charset="UTF-8">
+                               <title>Species</title>
+                           </head>
+                           <body style="background-color: springgreen;">
+                               <p1>The total number of species in ensemble are: 286</p1> <br>
+                               <p1>The limit you have selected is: {LIMIT}</p1> <br>
+                               <p1>The names of the species are: </p1> <br> <br>
+                               <textarea style="border: none; overflow: hidden; resize:none; background-color: springgreen" rows={count}>{string}    
+                               </textarea>
+                               </body>
+                               </html>"""
+
             except ValueError:
                 contents = Path('error.html').read_text()
 
@@ -150,8 +152,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             </head>
             <body style="background-color: springgreen;">
                 <h1>The names of the chromosomes are: </h1>
-                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows={count}>
-                {string}    
+                <textarea style="border: none; overflow: hidden; background-color: springgreen" rows={count}>{string}    
             </textarea>
             </body>
             </html>"""
@@ -209,7 +210,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         else:
             contents = Path('error.html').read_text()
 
-
+        print(contents)
         # Generating the response message
         self.send_response(code)  # -- Status line: OK!
 
